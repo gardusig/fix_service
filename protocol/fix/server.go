@@ -11,7 +11,7 @@ type ServerFIX struct {
 
 	settings    *quickfix.Settings
 	application quickfix.Application
-	initiator   *quickfix.Initiator
+	acceptor    *quickfix.Acceptor
 }
 
 func NewServerFIX(filepath string) (*ClientFIX, error) {
@@ -19,32 +19,31 @@ func NewServerFIX(filepath string) (*ClientFIX, error) {
 	if err != nil {
 		return nil, err
 	}
-	app := GenericApp{}
 	client := ClientFIX{
 		settings:            settings,
-		application:         app,
+		application:         GenericApp{},
 		messageStoreFactory: quickfix.NewMemoryStoreFactory(),
 		logFactory:          quickfix.NewScreenLogFactory(),
 	}
 	return &client, nil
 }
 
-func (c ServerFIX) Start() error {
+func (s ServerFIX) Start() error {
 	logrus.Debug("Starting FIX client")
 	var err error
-	c.initiator, err = quickfix.NewInitiator(
-		c.application,
-		c.messageStoreFactory,
-		c.settings,
-		c.logFactory,
+	s.acceptor, err = quickfix.NewAcceptor(
+		s.application,
+		s.messageStoreFactory,
+		s.settings,
+		s.logFactory,
 	)
 	if err != nil {
 		logrus.Debug("Failed to create fix initiator, reason: ", err.Error())
 		return err
 	}
-	return c.initiator.Start()
+	return s.acceptor.Start()
 }
 
 func (c ServerFIX) Stop() {
-	c.initiator.Stop()
+	c.acceptor.Stop()
 }

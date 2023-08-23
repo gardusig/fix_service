@@ -19,10 +19,9 @@ func NewClientFIX(filepath string) (*ClientFIX, error) {
 	if err != nil {
 		return nil, err
 	}
-	app := GenericApp{}
 	client := ClientFIX{
 		settings:            settings,
-		application:         app,
+		application:         GenericApp{},
 		messageStoreFactory: quickfix.NewMemoryStoreFactory(),
 		logFactory:          quickfix.NewScreenLogFactory(),
 	}
