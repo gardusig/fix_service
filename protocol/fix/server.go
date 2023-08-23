@@ -14,18 +14,18 @@ type ServerFIX struct {
 	acceptor    *quickfix.Acceptor
 }
 
-func NewServerFIX(filepath string) (*ClientFIX, error) {
+func NewServerFIX(filepath string) (*ServerFIX, error) {
 	settings, err := getSettingsFromFile(filepath)
 	if err != nil {
 		return nil, err
 	}
-	client := ClientFIX{
+	server := ServerFIX{
 		settings:            settings,
 		application:         GenericApp{},
 		messageStoreFactory: quickfix.NewMemoryStoreFactory(),
 		logFactory:          quickfix.NewScreenLogFactory(),
 	}
-	return &client, nil
+	return &server, nil
 }
 
 func (s ServerFIX) Start() error {
