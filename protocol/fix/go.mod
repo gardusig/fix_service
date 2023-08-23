@@ -1,4 +1,4 @@
-module github.com/gardusig/fix_service/common
+module github.com/gardusig/fix_service/protocol
 
 go 1.21.0
 
