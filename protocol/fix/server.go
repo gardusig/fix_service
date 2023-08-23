@@ -1,16 +1,11 @@
 package fix
 
 import (
-	"bytes"
-	"fmt"
-	"io"
-	"os"
-
 	"github.com/quickfixgo/quickfix"
 	"github.com/sirupsen/logrus"
 )
 
-type ClientFIX struct {
+type ServerFIX struct {
 	messageStoreFactory quickfix.MessageStoreFactory
 	logFactory          quickfix.LogFactory
 
@@ -19,7 +14,7 @@ type ClientFIX struct {
 	initiator   *quickfix.Initiator
 }
 
-func NewClientFIX(filepath string) (*ClientFIX, error) {
+func NewServerFIX(filepath string) (*ClientFIX, error) {
 	settings, err := getSettingsFromFile(filepath)
 	if err != nil {
 		return nil, err
@@ -34,7 +29,7 @@ func NewClientFIX(filepath string) (*ClientFIX, error) {
 	return &client, nil
 }
 
-func (c ClientFIX) Start() error {
+func (c ServerFIX) Start() error {
 	logrus.Debug("Starting FIX client")
 	var err error
 	c.initiator, err = quickfix.NewInitiator(
@@ -50,20 +45,6 @@ func (c ClientFIX) Start() error {
 	return c.initiator.Start()
 }
 
-func (c ClientFIX) Stop() {
+func (c ServerFIX) Stop() {
 	c.initiator.Stop()
-}
-
-func getSettingsFromFile(filepath string) (*quickfix.Settings, error) {
-	cfg, err := os.Open(filepath)
-	if err != nil {
-		return nil, fmt.Errorf("error opening %v, %v", filepath, err)
-	}
-	defer cfg.Close()
-	stringData, readErr := io.ReadAll(cfg)
-	if readErr != nil {
-		return nil, fmt.Errorf("error reading cfg: %s,", readErr)
-	}
-	reader := bytes.NewReader(stringData)
-	return quickfix.ParseSettings(reader)
 }
