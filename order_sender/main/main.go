@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"fix_service/protocol/fix"
+	"github.com/gardusig/fix_service/protocol/fix"
 )
 
 const fixSettingsFilepath = "/Users/gardusig/github/fix_service/order_sender/config/fix.cfg"

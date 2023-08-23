@@ -50,5 +50,4 @@ func main() {
 		panic(err)
 		return fmt.Errorf("error opening %v, %v", cfgFileName, err)
 	}
-
 }

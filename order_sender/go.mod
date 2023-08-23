@@ -1,3 +1,3 @@
-module github.com/gardusig/fix_service/order_sender
+module github.com/gardusig/fix_service/protocol/fix
 
 go 1.21.0
