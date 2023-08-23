@@ -2,9 +2,9 @@ module github.com/gardusig/fix_service/order_sender
 
 go 1.21.0
 
-replace github.com/gardusig/fix_service/protocol/fix => ../protocol/fix
+require github.com/gardusig/fix_service/protocol/fix v0.0.0-20230823133742-47f4a7d172a8
 
-require github.com/gardusig/fix_service/protocol/fix v0.0.0-00010101000000-000000000000
+replace github.com/gardusig/fix_service/protocol/fix => ../protocol/fix
 
 require (
 	github.com/armon/go-proxyproto v0.0.0-20210323213023-7e956b284f0a // indirect
