@@ -1,8 +1,8 @@
-module github.com/gardusig/fix_service/matching_engine
+module github.com/gardusig/fix_service/server
 
 go 1.21.0
 
-require github.com/gardusig/fix_service/protocol/fix v0.0.0-20230823133742-47f4a7d172a8
+require github.com/gardusig/fix_service/protocol/fix v0.0.0-20230823185929-7edce9083c92
 
 require (
 	github.com/armon/go-proxyproto v0.0.0-20210323213023-7e956b284f0a // indirect
@@ -24,5 +24,3 @@ require (
 	golang.org/x/sys v0.11.0 // indirect
 	golang.org/x/text v0.12.0 // indirect
 )
-
-replace github.com/gardusig/fix_service/protocol/fix => ../protocol/fix

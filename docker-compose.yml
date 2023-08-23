@@ -1,21 +1,20 @@
 version: "3"
 
 services:
-  algo_engine:
+  server:
     build:
-      context: ./algo_engine
-    environment:
-      - SERVER_ADDRESS=matching_engine:5000
-    networks:
-      - fix_network
-  matching_engine:
-    build:
-      context: ./matching_engine
+      context: ./server
     ports:
-      - "5000:5000"
+      - "5001:5001"
     networks:
       - fix_network
+  client:
+    build:
+      context: ./client
+    networks:
+      - fix_network
+    depends_on:
+      - server
 
 networks:
   fix_network:
-    driver: bridge

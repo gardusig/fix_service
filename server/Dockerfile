@@ -9,7 +9,7 @@ COPY . /app
 RUN go mod download
 
 # Build the Go application
-RUN go build -o algo_engine ./main
+RUN go build -o server ./main
 
 # Set the entry point for the container
-CMD ["./algo_engine"]
+CMD ["./server"]

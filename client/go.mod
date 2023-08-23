@@ -1,10 +1,8 @@
-module github.com/gardusig/fix_service/order_sender
+module github.com/gardusig/fix_service/client
 
 go 1.21.0
 
-require github.com/gardusig/fix_service/protocol/fix v0.0.0-20230823133742-47f4a7d172a8
-
-replace github.com/gardusig/fix_service/protocol/fix => ../protocol/fix
+require github.com/gardusig/fix_service/protocol/fix v0.0.0-20230823185929-7edce9083c92
 
 require (
 	github.com/armon/go-proxyproto v0.0.0-20210323213023-7e956b284f0a // indirect

@@ -9,7 +9,7 @@ COPY . /app
 RUN go mod download
 
 # Build the Go application
-RUN go build -o matching_engine ./main
+RUN go build -o client ./main
 
 # Set the entry point for the container
-CMD ["./matching_engine"]
+CMD ["./client"]
