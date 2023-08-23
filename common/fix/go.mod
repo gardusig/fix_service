@@ -1,4 +1,4 @@
-module trading_bot/common
+module github.com/gardusig/fix_service/common
 
 go 1.21.0
 

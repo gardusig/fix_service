@@ -2,9 +2,11 @@ package main
 
 import (
 	"fmt"
+
+	"github.com/gardusig/fix_service/common/fix"
 )
 
-const fixSettingsFilepath = "/Users/gardusig/beyond/trading-bot/matching_engine/config/fix.cfg"
+const fixSettingsFilepath = "/Users/gardusig/github/fix_service/order_sender/config/fix.cfg"
 
 func main() {
 	fmt.Println("Starting algo-engine...")
