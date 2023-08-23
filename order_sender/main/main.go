@@ -10,7 +10,10 @@ const fixSettingsFilepath = "/Users/gardusig/github/fix_service/order_sender/con
 
 func main() {
 	fmt.Println("Starting algo-engine...")
-	fixClient := fix.NewClientFIX(fixSettingsFilepath)
+	fixClient, err := fix.NewClientFIX(fixSettingsFilepath)
+	if err != nil {
+		panic(err)
+	}
 	fixClient.Start()
 	defer fixClient.Stop()
 	fmt.Println("Started algo-engine")
