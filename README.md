@@ -1,2 +1,2 @@
-# fix_service
-Example service using FIX (Financial Information eXchange) protocol
+# trading-bot
+Trading bot compatible with B3
