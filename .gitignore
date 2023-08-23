@@ -20,7 +20,6 @@
 vendor/
 vendor.bak/
 Godeps/
-.github/
 .idea/
 
 # Output directories (remove the ones you're not using)

@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"path"
+	"time"
 
 	"github.com/gardusig/fix_service/protocol/fix"
 )
@@ -16,5 +17,5 @@ func main() {
 	client.Start()
 	defer client.Stop()
 	fmt.Println("Started client")
-	select {}
+	time.Sleep(5 * time.Second)
 }
