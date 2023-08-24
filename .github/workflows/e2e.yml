@@ -1,4 +1,4 @@
-name: Test
+name: E2E Test
 
 on:
   pull_request:
@@ -15,10 +15,12 @@ jobs:
         run: |
           sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
           sudo chmod +x /usr/local/bin/docker-compose
-      - name: Copy Dockerfiles
-        run: |
-          mkdir client && cp ../clientfix/Dockerfile ./client/
-          mkdir server && cp ../serverfix/Dockerfile ./server/
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GHCR_TOKEN }}
       - name: Build services
         run: docker-compose build
       - name: Start server
