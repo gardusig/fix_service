@@ -1,37 +1,38 @@
 package fix
 
 import (
+	"github.com/gardusig/fix_service/protocol/fix/internal"
+	"github.com/gardusig/fix_service/protocol/fix/internal/application"
 	"github.com/quickfixgo/quickfix"
 	"github.com/sirupsen/logrus"
 )
 
-type ClientFIX struct {
-	messageStoreFactory quickfix.MessageStoreFactory
+type Client struct {
+	application         quickfix.Application
 	logFactory          quickfix.LogFactory
+	messageStoreFactory quickfix.MessageStoreFactory
+	settings            *quickfix.Settings
 
-	settings    *quickfix.Settings
-	application quickfix.Application
-	initiator   *quickfix.Initiator
+	initiator *quickfix.Initiator
 }
 
-func NewClientFIX(filepath string) (*ClientFIX, error) {
-	settings, err := getSettingsFromFile(filepath)
+func NewClientFIX(filepath string) (*Client, error) {
+	settings, err := internal.GetSettingsFromFile(filepath)
 	if err != nil {
 		return nil, err
 	}
-	client := ClientFIX{
-		settings:            settings,
-		application:         GenericApp{},
-		messageStoreFactory: quickfix.NewMemoryStoreFactory(),
+	client := Client{
+		application:         application.AppClient{},
 		logFactory:          quickfix.NewScreenLogFactory(),
+		messageStoreFactory: quickfix.NewMemoryStoreFactory(),
+		settings:            settings,
 	}
 	return &client, nil
 }
 
-func (c ClientFIX) Start() error {
-	logrus.Debug("Starting FIX client")
-	var err error
-	c.initiator, err = quickfix.NewInitiator(
+func (c Client) Start() error {
+	logrus.Debug("Starting FIX client...")
+	initiator, err := quickfix.NewInitiator(
 		c.application,
 		c.messageStoreFactory,
 		c.settings,
@@ -41,9 +42,10 @@ func (c ClientFIX) Start() error {
 		logrus.Debug("Failed to create fix initiator, reason: ", err.Error())
 		return err
 	}
+	c.initiator = initiator
 	return c.initiator.Start()
 }
 
-func (c ClientFIX) Stop() {
+func (c Client) Stop() {
 	c.initiator.Stop()
 }

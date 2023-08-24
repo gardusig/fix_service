@@ -1,4 +1,4 @@
-package fix
+package internal
 
 import (
 	"bytes"
@@ -9,7 +9,7 @@ import (
 	"github.com/quickfixgo/quickfix"
 )
 
-func getSettingsFromFile(filepath string) (*quickfix.Settings, error) {
+func GetSettingsFromFile(filepath string) (*quickfix.Settings, error) {
 	cfg, err := os.Open(filepath)
 	if err != nil {
 		return nil, fmt.Errorf("error opening %v, %v", filepath, err)
