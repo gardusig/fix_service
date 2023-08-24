@@ -2,13 +2,13 @@ version: "3"
 
 services:
   server:
-    image: ghcr.io/gardusig/serverfix:v1.0.11
+    image: ghcr.io/gardusig/serverfix:v1.0.1
     ports:
       - "5001:5001"
     networks:
       - fix_network
   client:
-    image: ghcr.io/gardusig/clientfix:v1.0.1
+    image: ghcr.io/gardusig/clientfix:v1.0.11
     networks:
       - fix_network
     depends_on:
