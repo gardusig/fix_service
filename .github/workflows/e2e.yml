@@ -30,7 +30,7 @@ jobs:
       - name: Run client tests
         run: docker-compose up client
       - name: Wait for client server connection
-        run: while ! docker-compose logs --tail server | grep -q "Received heartbeat"; do sleep 1; done
+        run: while ! docker-compose logs --tail server | grep -q "Received logon response"; do sleep 1; done
       - name: Check for errors in server logs
         run: |
           ! docker-compose logs server | grep "panic\|error"
